@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Te invitamos a nuestro Asado!</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- YouTube API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fff1f1;
+            color: #333;
+            line-height: 1.6;
+            background-image: url('https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.92);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            padding: 0;
+            margin: 20px;
+        }
+        
+        .header {
+            background-color: #a02c2c;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background-image: linear-gradient(45deg, #a02c2c 25%, transparent 25%), 
+                              linear-gradient(-45deg, #a02c2c 25%, transparent 25%);
+            background-size: 20px 20px;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .content {
+            padding: 40px 30px 30px;
+            text-align: center;
+        }
+        
+        .date-time {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px dashed #a02c2c;
+            border-radius: 10px;
+            background-color: rgba(160, 44, 44, 0.1);
+        }
+        
+        .date-time h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #a02c2c;
+            margin-bottom: 15px;
+        }
+        
+        .date-time p {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .icon {
+            font-size: 2.5rem;
+            margin: 15px 0;
+            color: #a02c2c;
+        }
+        
+        .form-container {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #a02c2c;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ffcece;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            border-color: #a02c2c;
+            outline: none;
+        }
+        
+        button {
+            background-color: #a02c2c;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #7e2222;
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #ffcece;
+        }
+        
+        .decoration {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/1046/1046784.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.2;
+        }
+        
+        .decoration.top-left {
+            top: 20px;
+            left: 20px;
+            transform: rotate(-20deg);
+        }
+        
+        .decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            transform: rotate(20deg);
+        }
+        
+        .meeting-points {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff0f0;
+            border-left: 4px solid #a02c2c;
+            text-align: left;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .meeting-points h3 {
+            color: #a02c2c;
+            margin-bottom: 10px;
+        }
+        
+        .meeting-points ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        .meeting-points li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .meeting-points li:before {
+            content: "\f3c5";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #a02c2c;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .date-time h3 {
+                font-size: 1.5rem;
+            }
+            
+            .decoration {
+                width: 100px;
+                height: 100px;
+            }
+        }
+        
+        .success-message {
+            display: none;
+            background-color: #a02c2c;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .google-form {
+            width: 100%;
+            height: 700px;
+            border: none;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .calendar-button {
+            display: inline-block;
+            background-color: #4285F4;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .calendar-button:hover {
+            background-color: #3367D6;
+            transform: translateY(-2px);
+        }
+        
+        .calendar-button i {
+            margin-right: 8px;
+        }
+        
+        /* Estilos para el texto clickeable de sabaleta */
+        .sabaleta-text {
+            display: inline-block;
+            color: #a02c2c;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: color 0.3s;
+        }
+        
+        .sabaleta-text:hover {
+            color: #7e2222;
+            transform: scale(1.05);
+        }
+        
+        
+        .playing {
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor oculto para el reproductor de YouTube -->
+    <div id="youtubePlayer" style="position: absolute; top: -9999px; left: -9999px;"></div>
+
+    <div class="container">
+        <div class="decoration top-left"></div>
+        <div class="decoration bottom-right"></div>
+        
+        <div class="header">
+            <h1>¡Te invitamos a nuestro Asado!</h1>
+            <p>Una tarde de cawineo y pura chela</p>
+        </div>
+        
+        <div class="content">
+            <p>Querido weon/a,</p>
+            <p>Tai invitao a un super asaito <span id="sabaletaText" class="sabaleta-text">(Inserte sabaleta)</span> en la casa del italo (como siempre) y te apurai.</p>
+            
+            <div class="date-time">
+                <h3>Fecha y Hora</h3>
+                <p>Sabado, 3 de Mayo de 2024</p>
+                <p>A las <strong>QUE ME PLASCA</strong> horas</p>
+                <div class="icon"><i class="fas fa-fire"></i></div>
+            </div>
+            
+            <p><strong>Dirección:</strong> Almirante Latorre 9513 (La casa del wea)</p>
+            
+            <div class="meeting-points">
+                <h3>Punto de Reunión</h3>
+                <ul>
+                    <li>Estación de metro El Bosque / Líder Los Morros</li>
+                    <li>DuocUC, Plaza Vespucio (Despues de Clases)</li>
+                </ul>
+            </div>
+            
+            <div class="form-container">
+                <h3>Confirmación de Asistencia</h3>
+                
+                <!-- Formulario de Google -->
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeIbHV4t62Ztw0LytJcsXKumVotvI3LWJsTeISUBXXF91pLfQ/viewform?embedded=true" width="640" height="585" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>    
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Cualquier cosa Habla con el weon que envio esto</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS y Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+// Variable global para el reproductor de YouTube
+let player;
+let playerReady = false;
+
+// Definir los tiempos de inicio y fin (en segundos)
+const startTime = 6; // Cambia esto al segundo exacto donde quieres que comience
+const endTime = 8.5;   // Cambia esto al segundo exacto donde quieres que termine
+
+// Función que se llamará automáticamente cuando la API de YouTube esté lista
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtubePlayer', {
+        height: '1',
+        width: '1',
+        videoId: '5Fv7pz9_7gE', // ID del video de YouTube - CAMBIA ESTE ID POR EL DE TU VIDEO
+        playerVars: {
+            'autoplay': 0,
+            'controls': 0,
+            'showinfo': 0,
+            'rel': 0,
+            'iv_load_policy': 3,
+            'fs': 0,
+            'modestbranding': 1,
+            'start': startTime, // Tiempo de inicio en segundos
+            'end': endTime      // Tiempo de fin en segundos
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+}
+
+// Función que se llama cuando el reproductor está listo
+function onPlayerReady(event) {
+    playerReady = true;
+    console.log("Reproductor de YouTube listo");
+    // Configuramos el volumen al máximo
+    player.setVolume(100);
+}
+
+// Función que se llama cuando cambia el estado del reproductor
+function onPlayerStateChange(event) {
+    const sabaletaText = document.getElementById('sabaletaText');
+    
+    // Cuando el video termina (estado = 0) o se pausa (estado = 2)
+    if (event.data === YT.PlayerState.ENDED || event.data === YT.PlayerState.PAUSED) {
+        sabaletaText.classList.remove('playing');
+    }
+    
+    // Cuando el video está reproduciendo (estado = 1)
+    if (event.data === YT.PlayerState.PLAYING) {
+        sabaletaText.classList.add('playing');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const sabaletaText = document.getElementById('sabaletaText');
+    
+    // Función para reproducir el audio del video de YouTube
+    function playSabaleta() {
+        // Verificamos si el reproductor está listo
+        if (playerReady && player && player.playVideo) {
+            // Reproducimos desde el tiempo de inicio específico
+            player.seekTo(startTime);
+            
+            // Reproducimos el video (solo audio)
+            player.playVideo();
+            
+            // Añadimos clase para la animación
+            sabaletaText.classList.add('playing');
+            
+            // Configuramos un temporizador para detener el video en el tiempo final
+            setTimeout(function() {
+                player.pauseVideo();
+                sabaletaText.classList.remove('playing');
+            }, (endTime - startTime) * 1000); // Convertimos a milisegundos
+        } else {
+            console.error("El reproductor de YouTube no está listo");
+            alert("Intenta de nuevo en unos segundos. El reproductor de YouTube se está cargando.");
+        }
+    }
+    
+    // Añadimos el evento de clic
+    sabaletaText.addEventListener('click', playSabaleta);
+});
+
+    </script>
+</body>
+</html>
+
